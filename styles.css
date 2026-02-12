@@ -1,343 +1,397 @@
+/* ================== Base Reset ================== */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root{
+  --bg: #0b0b0c;
+  --panel: #141416;
+  --panel-2: #1b1b1e;
+  --border: rgba(255,255,255,0.08);
+  --muted: rgba(255,255,255,0.65);
+  --text: rgba(255,255,255,0.92);
+  --gold: #ffd166; /* warm gold like template */
+  --gold-2: rgba(255,209,102,0.12);
+  --shadow: 0 18px 60px rgba(0,0,0,0.55);
+  --shadow-soft: 0 12px 30px rgba(0,0,0,0.35);
+  --radius: 22px;
+  --radius-sm: 14px;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #0a0a0a;
-    color: #e0e0e0;
-    line-height: 1.6;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: radial-gradient(1200px 600px at 20% 0%, rgba(255,209,102,0.08), transparent 55%),
+              radial-gradient(900px 500px at 85% 20%, rgba(120,120,255,0.05), transparent 55%),
+              var(--bg);
+  color: var(--text);
+  line-height: 1.6;
 }
 
 /* ================== Layout ================== */
 .container {
-    display: flex;
-    min-height: 100vh;
+  display: flex;
+  min-height: 100vh;
+  padding: 28px;
+  gap: 26px; /* spacing like template */
 }
 
-/* ================== Sidebar ================== */
+/* ================== Sidebar (Card style like template) ================== */
 .sidebar {
-    width: 300px;
-    background-color: #1a1a1a;
-    padding: 30px;
-    position: fixed;
-    height: 100vh;
-    overflow-y: auto;
-    border-right: 1px solid #2a2a2a;
+  width: 320px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 26px 22px;
+  height: calc(100vh - 56px);
+  position: sticky;
+  top: 28px;
+  overflow-y: auto;
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(10px);
 }
 
 .profile-section {
-    text-align: center;
-    margin-bottom: 40px;
+  text-align: center;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 18px;
 }
 
 .profile-img {
-    width: 150px;
-    height: 150px;
-    border-radius: 15px;
-    object-fit: cover;
-    margin-bottom: 20px;
-    border: 3px solid #333;
+  width: 140px;
+  height: 140px;
+  border-radius: 20px;
+  object-fit: cover;
+  border: 1px solid rgba(255,255,255,0.14);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+  margin-bottom: 14px;
 }
 
 .name {
-    font-size: 24px;
-    font-weight: 600;
-    margin-bottom: 10px;
-    color: #fff;
+  font-size: 24px;
+  font-weight: 750;
+  color: #fff;
+  margin-bottom: 8px;
 }
 
 .title {
-    font-size: 14px;
-    color: #999;
-    margin-bottom: 20px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.65);
+  margin-bottom: 14px;
 }
 
 .social-links {
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-    margin-top: 15px;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 6px;
 }
 
 .social-icon {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #2a2a2a;
-    border-radius: 8px;
-    color: #999;
-    transition: all 0.3s;
-    text-decoration: none;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  color: rgba(255,255,255,0.7);
+  transition: transform 0.25s, background 0.25s, border 0.25s;
+  text-decoration: none;
 }
 
 .social-icon:hover {
-    background-color: #ffd700;
-    color: #0a0a0a;
-    transform: 
+  background: var(--gold-2);
+  border-color: rgba(255,209,102,0.25);
+  transform: translateY(-2px);
+  color: #fff;
+}
+
+.social-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.contact-info { margin-top: 14px; }
 
 .contact-item {
-    margin-bottom: 25px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #2a2a2a;
+  padding: 14px 14px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 12px;
 }
 
-.contact-item:last-child {
-    border-bottom: none;
-}
+.contact-item:last-child { margin-bottom: 0; }
 
 .contact-item .icon {
-    font-size: 20px;
-    margin-bottom: 5px;
-    display: block;
+  font-size: 18px;
+  margin-bottom: 6px;
+  display: block;
+  opacity: 0.95;
 }
 
 .contact-item span:not(.icon) {
-    display: block;
-    font-size: 11px;
-    color: #666;
-    margin-bottom: 5px;
-    letter-spacing: 1px;
+  display: block;
+  font-size: 11px;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 1.2px;
+  margin-bottom: 6px;
 }
 
 .contact-item p {
-    font-size: 14px;
-    color: #e0e0e0;
+  font-size: 14px;
+  color: rgba(255,255,255,0.85);
 }
 
-/* ================== Main Content ================== */
+/* ================== Main Content (Panel like template) ================== */
 .main-content {
-    margin-left: 300px;
-    flex: 1;
-    padding: 40px 60px;
-    background-color: #0f0f0f;
-
-    /* Center content */
-    display: flex;
-    justify-content: center;
+  flex: 1;
+  display: flex;
+  justify-content: center;
 }
 
 .section {
-    width: 100%;
-    max-width: 980px;
-    animation: fadeIn 0.5s;
+  width: 100%;
+  max-width: 980px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 28px 40px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+  animation: fadeIn 0.5s ease;
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* ================== Navigation ================== */
+/* ================== Navbar (rounded pill tabs like template) ================== */
 .navbar {
-    display: flex;
-    gap: 30px;
-    margin-bottom: 40px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #2a2a2a;
+  display: flex;
+  gap: 18px;
+  justify-content: flex-end;
+  padding: 14px 16px;
+  margin-bottom: 26px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
 }
 
 .nav-link {
-    color: #999;
-    text-decoration: none;
-    font-size: 16px;
-    transition: color 0.3s;
+  color: rgba(255,255,255,0.68);
+  text-decoration: none;
+  font-size: 14px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  transition: background 0.25s, color 0.25s, border 0.25s, transform 0.25s;
+  border: 1px solid transparent;
 }
 
-.nav-link:hover,
+.nav-link:hover {
+  background: rgba(255,255,255,0.04);
+  color: rgba(255,255,255,0.9);
+}
+
 .nav-link.active {
-    color: #ffd700;
+  background: rgba(255,209,102,0.10);
+  border: 1px solid rgba(255,209,102,0.22);
+  color: var(--gold);
 }
 
-/* ================== Section Titles ================== */
+/* ================== Titles ================== */
 .section-title {
-    font-size: 36px;
-    margin-bottom: 30px;
-    color: #fff;
+  font-size: 44px;
+  font-weight: 800;
+  color: #fff;
+  margin: 6px 0 10px;
+}
+
+/* small gold underline like template */
+.section-title::after{
+  content:"";
+  display:block;
+  width: 42px;
+  height: 4px;
+  background: var(--gold);
+  border-radius: 6px;
+  margin-top: 12px;
 }
 
 .subsection-title {
-    font-size: 28px;
-    margin: 50px 0 30px;
-    color: #fff;
+  font-size: 28px;
+  font-weight: 800;
+  color: #fff;
+  margin: 34px 0 18px;
 }
 
-/* ================== About Card ================== */
+/* ================== About (remove “boxy” feel, match template spacing) ================== */
 .about-content {
-    background-color: #1a1a1a;
-    border: 1px solid #2a2a2a;
-    border-radius: 12px;
-    padding: 30px;
-    margin-bottom: 50px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  margin-top: 18px;
 }
 
 .about-content p {
-    margin-bottom: 18px;
-    color: #b0b0b0;
-    font-size: 15px;
-    line-height: 1.8;
+  margin-bottom: 18px;
+  color: rgba(255,255,255,0.70);
+  font-size: 15px;
+  line-height: 1.9;
 }
 
+.about-content strong { color: rgba(255,255,255,0.92); }
+
 .about-content ul {
-    margin-top: 10px;
-    padding-left: 20px;
+  margin-top: 12px;
+  padding-left: 18px;
 }
 
 .about-content li {
-    margin: 8px 0;
-    color: #d0d0d0;
+  margin: 8px 0;
+  color: rgba(255,255,255,0.82);
 }
 
-/* ================== Services Grid ================== */
+/* ================== Services Cards (premium cards like template) ================== */
 .services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
-    margin-bottom: 50px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 18px;
+  margin-bottom: 26px;
 }
 
 .service-card {
-    background-color: #1a1a1a;
-    padding: 25px;
-    border-radius: 12px;
-    display: flex;
-    gap: 20px;
-    transition: transform 0.3s, box-shadow 0.3s;
-    border: 1px solid #2a2a2a;
+  background: linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.02));
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 18px;
+  padding: 18px;
+  display: flex;
+  gap: 14px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border 0.25s ease;
+  box-shadow: 0 10px 26px rgba(0,0,0,0.28);
 }
 
 .service-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(255, 215, 0, 0.1);
+  transform: translateY(-4px);
+  border-color: rgba(255,209,102,0.18);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.45);
 }
 
 .service-icon {
-    font-size: 32px;
-    min-width: 50px;
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  background: rgba(255,209,102,0.10);
+  border: 1px solid rgba(255,209,102,0.22);
+  font-size: 22px;
 }
 
 .service-content h3 {
-    font-size: 16px;
-    margin-bottom: 10px;
-    color: #fff;
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 6px;
+  font-weight: 750;
 }
 
 .service-content p {
-    font-size: 14px;
-    color: #888;
-    line-height: 1.6;
+  font-size: 13px;
+  color: rgba(255,255,255,0.62);
+  line-height: 1.6;
 }
 
 /* ================== Testimonials ================== */
 .testimonials-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-    margin-bottom: 50px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 26px;
 }
 
 .testimonial-card {
-    background-color: #1a1a1a;
-    padding: 30px;
-    border-radius: 12px;
-    text-align: center;
-    border: 1px solid #2a2a2a;
+  background: linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.02));
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 18px;
+  padding: 18px;
+  text-align: left;
+  box-shadow: 0 10px 26px rgba(0,0,0,0.28);
 }
 
 .testimonial-img {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    margin-bottom: 15px;
-    object-fit: cover;
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  object-fit: cover;
+  border: 1px solid rgba(255,255,255,0.10);
+  margin-bottom: 10px;
 }
 
 .testimonial-card h4 {
-    font-size: 18px;
-    margin-bottom: 10px;
-    color: #fff;
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: #fff;
+  font-weight: 750;
 }
 
 .testimonial-card p {
-    font-size: 14px;
-    color: #888;
-    font-style: italic;
+  font-size: 13px;
+  color: rgba(255,255,255,0.62);
+  font-style: normal;
+  line-height: 1.6;
 }
 
-/* ================== Clients Grid ================== */
+/* ================== Clients ================== */
 .clients-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 30px;
-    margin-bottom: 50px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 10px;
 }
 
 .client-logo {
-    width: 100%;
-    height: 100px;
-    object-fit: contain;
-    background-color: #1a1a1a;
-    padding: 20px;
-    border-radius: 12px;
-    border: 1px solid #2a2a2a;
-    filter: grayscale(100%);
-    transition: filter 0.3s;
+  width: 100%;
+  height: 62px;
+  object-fit: contain;
+  padding: 12px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  filter: grayscale(100%);
+  transition: filter 0.25s ease, transform 0.25s ease, border 0.25s ease;
 }
 
 .client-logo:hover {
-    filter: grayscale(0%);
+  filter: grayscale(0%);
+  transform: translateY(-2px);
+  border-color: rgba(255,209,102,0.18);
 }
 
 /* ================== Responsive ================== */
-@media (max-width: 1024px) {
-    .sidebar {
-        width: 250px;
-    }
-
-    .main-content {
-        margin-left: 250px;
-        padding: 30px 40px;
-        display: flex;
-        justify-content: center;
-    }
+@media (max-width: 1100px){
+  .container { padding: 18px; }
+  .sidebar { width: 300px; }
+  .section { max-width: 920px; }
 }
 
-@media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-    }
+@media (max-width: 980px){
+  .container { flex-direction: column; }
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    top: 0;
+  }
+  .main-content { justify-content: stretch; }
+  .section { max-width: 100%; }
+}
 
-    .sidebar {
-        width: 100%;
-        position: relative;
-        height: auto;
-    }
-
-    .main-content {
-        margin-left: 0;
-        padding: 20px;
-        display: block;
-    }
-
-    .section {
-        max-width: 100%;
-    }
-
-    .services-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .navbar {
-        flex-wrap: wrap;
-        gap: 15px;
-    }
-
-    .about-content {
-        padding: 20px;
-    }
+@media (max-width: 640px){
+  .navbar { justify-content: flex-start; flex-wrap: wrap; gap: 10px; }
+  .section-title { font-size: 34px; }
+  .services-grid, .testimonials-grid { grid-template-columns: 1fr; }
+  .clients-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
