@@ -39,7 +39,7 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Observe all service cards, testimonials, and blog cards
-document.querySelectorAll('.service-card, .testimonial-card, .blog-card').forEach(el => {
+document.querySelectorAll('.service-card, .testimonial-card, .blog-post-card').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(20px)';
     el.style.transition = 'opacity 0.5s, transform 0.5s';
