@@ -93,6 +93,9 @@ body {
 }
 
 .contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
     margin-bottom: 25px;
     padding-bottom: 20px;
     border-bottom: 1px solid #2a2a2a;
@@ -100,6 +103,51 @@ body {
 
 .contact-item:last-child {
     border-bottom: none;
+    margin-bottom: 0;
+}
+
+.contact-icon-box {
+    width: 48px;
+    height: 48px;
+    background-color: #2a2a2a;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffd700;
+    flex-shrink: 0;
+}
+
+.contact-info-content {
+    flex: 1;
+    padding-top: 4px;
+}
+
+.contact-info-content span {
+    display: block;
+    font-size: 11px;
+    color: #666;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+
+.contact-info-content a {
+    color: #e0e0e0;
+    text-decoration: none;
+    font-size: 14px;
+    display: block;
+    transition: color 0.3s;
+}
+
+.contact-info-content a:hover {
+    color: #ffd700;
+}
+
+.contact-info-content p {
+    font-size: 14px;
+    color: #e0e0e0;
+    margin: 0;
 }
 
 .contact-item .icon {
