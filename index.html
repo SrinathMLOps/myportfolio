@@ -328,6 +328,51 @@
                     </div>
                 </div>
             </section>
+
+            <!-- Contact Section -->
+            <section id="contact" class="section">
+                <h1 class="section-title">Contact</h1>
+                
+                <div class="contact-map-container">
+                    <div id="map" class="contact-map">
+                        <div class="map-placeholder">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ffd700" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                            <p>Loading map...</p>
+                        </div>
+                    </div>
+                    <button id="viewLargerMap" class="view-map-btn">View larger map</button>
+                </div>
+
+                <h2 class="subsection-title">Contact Form</h2>
+                
+                <form id="contactForm" class="contact-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="text" id="fullName" name="fullName" placeholder="Full name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder="Email address" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <textarea id="message" name="message" rows="6" placeholder="Your Message" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                        </svg>
+                        Send Message
+                    </button>
+                </form>
+
+                <div id="formStatus" class="form-status"></div>
+            </section>
         </main>
     </div>
 
