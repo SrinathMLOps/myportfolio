@@ -9,17 +9,12 @@ document.querySelectorAll('.nav-link').forEach(link => {
         // Add active class to clicked link
         this.classList.add('active');
         
-        // Hide all sections
-        document.querySelectorAll('.section').forEach(section => {
-            section.style.display = 'none';
-        });
-        
-        // Show target section
+        // Get target section
         const targetId = this.getAttribute('href');
         const targetSection = document.querySelector(targetId);
         
         if (targetSection) {
-            targetSection.style.display = 'block';
+            // Scroll to section
             targetSection.scrollIntoView({
                 behavior: 'smooth',
                 block: 'start'
