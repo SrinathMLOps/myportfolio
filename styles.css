@@ -78,17 +78,7 @@ body {
 .social-icon:hover {
     background-color: #ffd700;
     color: #0a0a0a;
-    transform: translateY(-3px);
-}
-
-.social-icon svg {
-    width: 20px;
-    height: 20px;
-}
-
-.contact-info {
-    margin-top: 30px;
-}
+    transform: 
 
 .contact-item {
     margin-bottom: 25px;
