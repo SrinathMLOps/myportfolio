@@ -1,4 +1,4 @@
-// Smooth scrolling for navigation links
+// Navigation and section visibility
 document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', function(e) {
         e.preventDefault();
@@ -11,16 +11,38 @@ document.querySelectorAll('.nav-link').forEach(link => {
         
         // Get target section
         const targetId = this.getAttribute('href');
-        const targetSection = document.querySelector(targetId);
         
+        // Hide all sections
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.display = 'none';
+        });
+        
+        // Show target section
+        const targetSection = document.querySelector(targetId);
         if (targetSection) {
-            // Scroll to section
-            targetSection.scrollIntoView({
+            targetSection.style.display = 'block';
+            
+            // Scroll to top of main content
+            document.querySelector('.main-content').scrollIntoView({
                 behavior: 'smooth',
                 block: 'start'
             });
         }
     });
+});
+
+// Show about section by default on page load
+document.addEventListener('DOMContentLoaded', function() {
+    // Hide all sections first
+    document.querySelectorAll('.section').forEach(section => {
+        section.style.display = 'none';
+    });
+    
+    // Show about section
+    const aboutSection = document.querySelector('#about');
+    if (aboutSection) {
+        aboutSection.style.display = 'block';
+    }
 });
 
 // Add scroll animation for elements
