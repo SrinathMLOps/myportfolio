@@ -322,8 +322,7 @@ if (contactForm) {
         }
         
         // Send email using EmailJS
-        // Replace 'YOUR_SERVICE_ID' and 'YOUR_TEMPLATE_ID' with your actual IDs
-        emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+        emailjs.send('service_8y9cs4s', 'template_wfnlkpr', templateParams)
             .then(function(response) {
                 console.log('SUCCESS!', response.status, response.text);
                 
