@@ -9,11 +9,17 @@ document.querySelectorAll('.nav-link').forEach(link => {
         // Add active class to clicked link
         this.classList.add('active');
         
-        // Smooth scroll to section
+        // Hide all sections
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.display = 'none';
+        });
+        
+        // Show target section
         const targetId = this.getAttribute('href');
         const targetSection = document.querySelector(targetId);
         
         if (targetSection) {
+            targetSection.style.display = 'block';
             targetSection.scrollIntoView({
                 behavior: 'smooth',
                 block: 'start'
@@ -37,8 +43,8 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Observe all service cards and testimonials
-document.querySelectorAll('.service-card, .testimonial-card').forEach(el => {
+// Observe all service cards, testimonials, and blog cards
+document.querySelectorAll('.service-card, .testimonial-card, .blog-card').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(20px)';
     el.style.transition = 'opacity 0.5s, transform 0.5s';
