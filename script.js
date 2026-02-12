@@ -267,43 +267,108 @@ if (contactForm) {
         const submitBtn = contactForm.querySelector('.submit-btn');
         
         // Get form data
-        const formData = {
-            fullName: document.getElementById('fullName').value,
-            email: document.getElementById('email').value,
-            message: document.getElementById('message').value,
-            location: userLocation
-        };
+        const fullName = document.getElementById('fullName').value;
+        const email = document.getElementById('email').value;
+        const message = document.getElementById('message').value;
         
         // Disable submit button
         submitBtn.disabled = true;
-        submitBtn.textContent = 'Sending...';
+        submitBtn.innerHTML = `
+            <div class="spinner"></div>
+            Sending...
+        `;
         
-        // Simulate form submission (replace with actual API call)
-        setTimeout(() => {
+        // Prepare template parameters
+        const templateParams = {
+            from_name: fullName,
+            from_email: email,
+            message: message,
+            to_name: 'Srinath Kaithoju',
+            reply_to: email,
+            location_lat: userLocation ? userLocation.lat : 'Not available',
+            location_lng: userLocation ? userLocation.lng : 'Not available',
+            location_address: document.getElementById('address') ? document.getElementById('address').textContent : 'Not available'
+        };
+        
+        // Check if EmailJS is configured
+        if (typeof emailjs === 'undefined') {
+            // Fallback: Open email client
+            const subject = encodeURIComponent(`Contact Form: Message from ${fullName}`);
+            const body = encodeURIComponent(`Name: ${fullName}\nEmail: ${email}\n\nMessage:\n${message}\n\nLocation: ${templateParams.location_address}\nCoordinates: ${templateParams.location_lat}, ${templateParams.location_lng}`);
+            window.location.href = `mailto:srinath.kaithoju@gmail.com?subject=${subject}&body=${body}`;
+            
             // Show success message
             formStatus.className = 'form-status success';
-            formStatus.textContent = 'Thank you! Your message has been sent successfully.';
+            formStatus.textContent = 'Opening your email client...';
             
             // Reset form
-            contactForm.reset();
-            
-            // Re-enable submit button
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = `
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <line x1="22" y1="2" x2="11" y2="13"></line>
-                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-                </svg>
-                Send Message
-            `;
-            
-            // Hide success message after 5 seconds
             setTimeout(() => {
-                formStatus.style.display = 'none';
-            }, 5000);
+                contactForm.reset();
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                    Send Message
+                `;
+                
+                setTimeout(() => {
+                    formStatus.style.display = 'none';
+                }, 3000);
+            }, 1000);
             
-            // Log form data (for demo purposes)
-            console.log('Form submitted:', formData);
-        }, 1500);
+            return;
+        }
+        
+        // Send email using EmailJS
+        // Replace 'YOUR_SERVICE_ID' and 'YOUR_TEMPLATE_ID' with your actual IDs
+        emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+            .then(function(response) {
+                console.log('SUCCESS!', response.status, response.text);
+                
+                // Show success message
+                formStatus.className = 'form-status success';
+                formStatus.textContent = '✓ Thank you! Your message has been sent successfully.';
+                
+                // Reset form
+                contactForm.reset();
+                
+                // Re-enable submit button
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                    Send Message
+                `;
+                
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    formStatus.style.display = 'none';
+                }, 5000);
+            }, function(error) {
+                console.log('FAILED...', error);
+                
+                // Show error message
+                formStatus.className = 'form-status error';
+                formStatus.textContent = '✗ Failed to send message. Please try again or email directly at srinath.kaithoju@gmail.com';
+                
+                // Re-enable submit button
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                    Send Message
+                `;
+                
+                // Hide error message after 8 seconds
+                setTimeout(() => {
+                    formStatus.style.display = 'none';
+                }, 8000);
+            });
     });
 }
