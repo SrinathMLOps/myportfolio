@@ -148,13 +148,15 @@ body {
     padding-bottom: 20px;
     border-bottom: 1px solid #2a2a2a;
     flex-wrap: wrap;
+    justify-content: flex-end;
 }
 
 .nav-link {
     color: #999;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 15px;
     transition: color 0.3s;
+    position: relative;
 }
 
 .nav-link:hover,
@@ -176,6 +178,19 @@ body {
     font-size: 36px;
     margin-bottom: 30px;
     color: #fff;
+    position: relative;
+    display: inline-block;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 50px;
+    height: 4px;
+    background-color: #ffd700;
+    border-radius: 2px;
 }
 
 .about-content p {
@@ -199,6 +214,19 @@ body {
     font-size: 28px;
     margin: 50px 0 30px;
     color: #fff;
+    position: relative;
+    display: inline-block;
+}
+
+.subsection-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background-color: #ffd700;
+    border-radius: 2px;
 }
 
 /* Services Grid */
@@ -211,34 +239,45 @@ body {
 
 .service-card {
     background-color: #0f0f0f;
-    padding: 25px;
-    border-radius: 12px;
+    padding: 30px;
+    border-radius: 16px;
     display: flex;
-    gap: 20px;
+    gap: 25px;
+    align-items: flex-start;
     transition: transform 0.3s, box-shadow 0.3s;
     border: 1px solid #2a2a2a;
 }
 
 .service-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(255, 215, 0, 0.1);
+    box-shadow: 0 10px 30px rgba(255, 215, 0, 0.15);
+    border-color: #3a3a3a;
 }
 
 .service-icon {
-    font-size: 32px;
-    min-width: 50px;
+    font-size: 40px;
+    min-width: 60px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1a1a1a;
+    border-radius: 12px;
+    border: 1px solid #2a2a2a;
 }
 
 .service-content h3 {
-    font-size: 16px;
-    margin-bottom: 10px;
+    font-size: 18px;
+    margin-bottom: 12px;
     color: #fff;
+    font-weight: 500;
 }
 
 .service-content p {
     font-size: 14px;
-    color: #888;
-    line-height: 1.6;
+    color: #999;
+    line-height: 1.7;
 }
 
 /* Testimonials */
