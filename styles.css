@@ -599,8 +599,14 @@ body {
 }
 
 /* Contact Section */
-.contact-map-container {
+.contact-map-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 30px;
     margin-bottom: 40px;
+}
+
+.contact-map-container {
     position: relative;
 }
 
@@ -637,11 +643,128 @@ body {
     font-size: 14px;
     cursor: pointer;
     transition: all 0.3s;
+    width: 100%;
 }
 
 .view-map-btn:hover {
     background-color: #2a2a2a;
     color: #ffd700;
+}
+
+/* Location Info Box */
+.location-info-box {
+    background-color: #0f0f0f;
+    border: 1px solid #2a2a2a;
+    border-radius: 16px;
+    padding: 25px;
+    height: fit-content;
+}
+
+.location-info-box h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+    color: #fff;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #2a2a2a;
+}
+
+.location-status {
+    margin-bottom: 20px;
+}
+
+.status-loading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #999;
+    font-size: 14px;
+}
+
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 3px solid #2a2a2a;
+    border-top-color: #ffd700;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.location-details {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.location-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.location-label {
+    font-size: 11px;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+
+.location-value {
+    font-size: 14px;
+    color: #e0e0e0;
+    word-break: break-word;
+}
+
+.refresh-location-btn {
+    width: 100%;
+    margin-top: 20px;
+    background-color: #1a1a1a;
+    color: #ffd700;
+    border: 1px solid #2a2a2a;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.3s;
+}
+
+.refresh-location-btn:hover {
+    background-color: #ffd700;
+    color: #0a0a0a;
+    transform: translateY(-2px);
+}
+
+.refresh-location-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.status-error {
+    color: #ef4444;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.status-success {
+    color: #22c55e;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .contact-form {
@@ -745,5 +868,13 @@ body {
     
     .contact-map {
         height: 300px;
+    }
+    
+    .contact-map-wrapper {
+        grid-template-columns: 1fr;
+    }
+    
+    .location-info-box {
+        order: -1;
     }
 }

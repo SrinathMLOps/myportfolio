@@ -333,17 +333,68 @@
             <section id="contact" class="section">
                 <h1 class="section-title">Contact</h1>
                 
-                <div class="contact-map-container">
-                    <div id="map" class="contact-map">
-                        <div class="map-placeholder">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ffd700" stroke-width="2">
+                <div class="contact-map-wrapper">
+                    <div class="contact-map-container">
+                        <div id="map" class="contact-map">
+                            <div class="map-placeholder">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ffd700" stroke-width="2">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                <p>Loading map...</p>
+                            </div>
+                        </div>
+                        <button id="viewLargerMap" class="view-map-btn">View larger map</button>
+                    </div>
+                    
+                    <div class="location-info-box">
+                        <h3>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffd700" stroke-width="2">
                                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                                 <circle cx="12" cy="10" r="3"></circle>
                             </svg>
-                            <p>Loading map...</p>
+                            Live Location
+                        </h3>
+                        
+                        <div id="locationStatus" class="location-status">
+                            <div class="status-loading">
+                                <div class="spinner"></div>
+                                <span>Detecting location...</span>
+                            </div>
                         </div>
+                        
+                        <div id="locationDetails" class="location-details" style="display: none;">
+                            <div class="location-item">
+                                <span class="location-label">Latitude:</span>
+                                <span id="latitude" class="location-value">-</span>
+                            </div>
+                            <div class="location-item">
+                                <span class="location-label">Longitude:</span>
+                                <span id="longitude" class="location-value">-</span>
+                            </div>
+                            <div class="location-item">
+                                <span class="location-label">Accuracy:</span>
+                                <span id="accuracy" class="location-value">-</span>
+                            </div>
+                            <div class="location-item">
+                                <span class="location-label">Address:</span>
+                                <span id="address" class="location-value">Loading...</span>
+                            </div>
+                            <div class="location-item">
+                                <span class="location-label">Last Updated:</span>
+                                <span id="lastUpdated" class="location-value">-</span>
+                            </div>
+                        </div>
+                        
+                        <button id="refreshLocation" class="refresh-location-btn" style="display: none;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="23 4 23 10 17 10"></polyline>
+                                <polyline points="1 20 1 14 7 14"></polyline>
+                                <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                            </svg>
+                            Refresh Location
+                        </button>
                     </div>
-                    <button id="viewLargerMap" class="view-map-btn">View larger map</button>
                 </div>
 
                 <h2 class="subsection-title">Contact Form</h2>

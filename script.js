@@ -71,26 +71,103 @@ document.querySelectorAll('.service-card, .testimonial-card, .blog-post-card').f
 
 // Geolocation and Map functionality
 let userLocation = null;
+let watchId = null;
+
+function updateLocationDisplay(position) {
+    const lat = position.coords.latitude;
+    const lng = position.coords.longitude;
+    const accuracy = position.coords.accuracy;
+    
+    userLocation = { lat, lng };
+    
+    // Update location details
+    document.getElementById('latitude').textContent = lat.toFixed(6);
+    document.getElementById('longitude').textContent = lng.toFixed(6);
+    document.getElementById('accuracy').textContent = `±${Math.round(accuracy)} meters`;
+    document.getElementById('lastUpdated').textContent = new Date().toLocaleTimeString();
+    
+    // Show location details and hide loading
+    document.getElementById('locationStatus').style.display = 'none';
+    document.getElementById('locationDetails').style.display = 'flex';
+    document.getElementById('refreshLocation').style.display = 'flex';
+    
+    // Update map
+    displayMap(userLocation);
+    
+    // Reverse geocode to get address
+    getAddress(lat, lng);
+}
+
+function getAddress(lat, lng) {
+    // Use Nominatim (OpenStreetMap) reverse geocoding API
+    fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.display_name) {
+                document.getElementById('address').textContent = data.display_name;
+            } else {
+                document.getElementById('address').textContent = 'Address not available';
+            }
+        })
+        .catch(error => {
+            console.error('Geocoding error:', error);
+            document.getElementById('address').textContent = 'Unable to fetch address';
+        });
+}
+
+function handleLocationError(error) {
+    const locationStatus = document.getElementById('locationStatus');
+    let errorMessage = '';
+    
+    switch(error.code) {
+        case error.PERMISSION_DENIED:
+            errorMessage = 'Location access denied. Please enable location permissions.';
+            break;
+        case error.POSITION_UNAVAILABLE:
+            errorMessage = 'Location information unavailable.';
+            break;
+        case error.TIMEOUT:
+            errorMessage = 'Location request timed out.';
+            break;
+        default:
+            errorMessage = 'An unknown error occurred.';
+    }
+    
+    locationStatus.innerHTML = `<div class="status-error">⚠️ ${errorMessage}</div>`;
+    
+    // Show default location
+    userLocation = { lat: 52.3555, lng: -1.1743 };
+    displayMap(userLocation);
+}
 
 function initMap() {
     if (navigator.geolocation) {
+        // Get initial position
         navigator.geolocation.getCurrentPosition(
-            (position) => {
-                userLocation = {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
-                };
-                displayMap(userLocation);
-            },
-            (error) => {
-                console.log('Geolocation error:', error);
-                // Fallback to default location (England, UK)
-                userLocation = { lat: 52.3555, lng: -1.1743 };
-                displayMap(userLocation);
+            updateLocationDisplay,
+            handleLocationError,
+            {
+                enableHighAccuracy: true,
+                timeout: 10000,
+                maximumAge: 0
+            }
+        );
+        
+        // Watch position for live updates
+        watchId = navigator.geolocation.watchPosition(
+            updateLocationDisplay,
+            (error) => console.log('Watch position error:', error),
+            {
+                enableHighAccuracy: true,
+                timeout: 5000,
+                maximumAge: 0
             }
         );
     } else {
-        // Fallback to default location
+        document.getElementById('locationStatus').innerHTML = 
+            '<div class="status-error">⚠️ Geolocation is not supported by your browser.</div>';
+        
+        // Show default location
         userLocation = { lat: 52.3555, lng: -1.1743 };
         displayMap(userLocation);
     }
@@ -100,11 +177,8 @@ function displayMap(location) {
     const mapElement = document.getElementById('map');
     if (!mapElement) return;
     
-    // Create an embedded Google Maps iframe
-    const mapUrl = `https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=${location.lat},${location.lng}&zoom=12`;
-    
-    // For demo purposes, use OpenStreetMap instead (no API key needed)
-    const osmUrl = `https://www.openstreetmap.org/export/embed.html?bbox=${location.lng-0.1},${location.lat-0.1},${location.lng+0.1},${location.lat+0.1}&layer=mapnik&marker=${location.lat},${location.lng}`;
+    // Use OpenStreetMap
+    const osmUrl = `https://www.openstreetmap.org/export/embed.html?bbox=${location.lng-0.01},${location.lat-0.01},${location.lng+0.01},${location.lat+0.01}&layer=mapnik&marker=${location.lat},${location.lng}`;
     
     mapElement.innerHTML = `<iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="${osmUrl}" style="border-radius: 16px;"></iframe>`;
 }
@@ -120,6 +194,47 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // Refresh location button
+    const refreshBtn = document.getElementById('refreshLocation');
+    if (refreshBtn) {
+        refreshBtn.addEventListener('click', function() {
+            this.disabled = true;
+            this.innerHTML = '<div class="spinner"></div> Refreshing...';
+            
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    updateLocationDisplay(position);
+                    refreshBtn.disabled = false;
+                    refreshBtn.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="23 4 23 10 17 10"></polyline>
+                            <polyline points="1 20 1 14 7 14"></polyline>
+                            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                        </svg>
+                        Refresh Location
+                    `;
+                },
+                (error) => {
+                    handleLocationError(error);
+                    refreshBtn.disabled = false;
+                    refreshBtn.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="23 4 23 10 17 10"></polyline>
+                            <polyline points="1 20 1 14 7 14"></polyline>
+                            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                        </svg>
+                        Refresh Location
+                    `;
+                },
+                {
+                    enableHighAccuracy: true,
+                    timeout: 10000,
+                    maximumAge: 0
+                }
+            );
+        });
+    }
+    
     // Initialize map when contact section is visible
     const contactSection = document.getElementById('contact');
     if (contactSection) {
@@ -132,6 +247,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }, { threshold: 0.1 });
         
         observer.observe(contactSection);
+    }
+});
+
+// Clean up watch position when leaving the page
+window.addEventListener('beforeunload', function() {
+    if (watchId !== null) {
+        navigator.geolocation.clearWatch(watchId);
     }
 });
 
