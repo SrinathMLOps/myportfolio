@@ -43,7 +43,46 @@ document.addEventListener('DOMContentLoaded', function() {
     if (aboutSection) {
         aboutSection.style.display = 'block';
     }
+    
+    // Initialize portfolio filters
+    initPortfolioFilters();
 });
+
+// Portfolio Filter Functionality
+function initPortfolioFilters() {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
+    
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            // Remove active class from all buttons
+            filterBtns.forEach(b => b.classList.remove('active'));
+            
+            // Add active class to clicked button
+            this.classList.add('active');
+            
+            // Get filter value
+            const filterValue = this.getAttribute('data-filter');
+            
+            // Filter portfolio items
+            portfolioItems.forEach(item => {
+                const category = item.getAttribute('data-category');
+                
+                if (filterValue === 'all' || category === filterValue) {
+                    item.classList.remove('hide');
+                    item.style.display = 'block';
+                } else {
+                    item.classList.add('hide');
+                    setTimeout(() => {
+                        if (item.classList.contains('hide')) {
+                            item.style.display = 'none';
+                        }
+                    }, 300);
+                }
+            });
+        });
+    });
+}
 
 // Add scroll animation for elements
 const observerOptions = {
@@ -60,8 +99,8 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Observe all service cards, testimonials, and blog cards
-document.querySelectorAll('.service-card, .testimonial-card, .blog-post-card').forEach(el => {
+// Observe all service cards, testimonials, blog cards, and portfolio items
+document.querySelectorAll('.service-card, .testimonial-card, .blog-post-card, .portfolio-item').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(20px)';
     el.style.transition = 'opacity 0.5s, transform 0.5s';
