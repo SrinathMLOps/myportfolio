@@ -437,6 +437,12 @@ body {
     transform: scale(1);
 }
 
+.portfolio-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
 .portfolio-item.hide {
     opacity: 0;
     transform: scale(0.8);
