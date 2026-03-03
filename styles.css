@@ -88,10 +88,16 @@ body {
     height: 20px;
 }
 
+.social-icon.company-logo {
+    padding: 0;
+    overflow: hidden;
+}
+
 .social-icon.company-logo img {
-    width: 24px;
-    height: 24px;
-    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
 }
 
 .contact-info {
