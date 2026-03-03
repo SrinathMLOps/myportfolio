@@ -88,6 +88,12 @@ body {
     height: 20px;
 }
 
+.social-icon.company-logo img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
 .contact-info {
     margin-top: 30px;
 }
