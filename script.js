@@ -107,6 +107,29 @@ document.querySelectorAll('.service-card, .testimonial-card, .blog-post-card, .p
     observer.observe(el);
 });
 
+// Flickering effect for portfolio items with multiple images
+function initFlickerEffect() {
+    const flickerItems = document.querySelectorAll('.portfolio-item-flicker');
+    
+    flickerItems.forEach(item => {
+        const images = item.querySelectorAll('.flicker-image');
+        if (images.length < 2) return;
+        
+        let currentIndex = 0;
+        
+        setInterval(() => {
+            images[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % images.length;
+            images[currentIndex].classList.add('active');
+        }, 3000); // Change image every 3 seconds
+    });
+}
+
+// Initialize flicker effect when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    initFlickerEffect();
+});
+
 
 // Geolocation and Map functionality
 let userLocation = null;

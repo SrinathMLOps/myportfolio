@@ -483,6 +483,27 @@ body {
     transition: transform 0.3s;
 }
 
+/* Flickering images for portfolio items */
+.portfolio-item-flicker .portfolio-image {
+    position: relative;
+}
+
+.portfolio-item-flicker .flicker-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.portfolio-item-flicker .flicker-image.active {
+    opacity: 1;
+    position: relative;
+}
+
 .portfolio-item:hover .portfolio-image img {
     transform: scale(1.1);
 }
