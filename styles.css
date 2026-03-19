@@ -696,6 +696,45 @@ body {
     transform: translateY(-2px);
 }
 
+/* LeetCode Styles */
+.social-icon.leetcode:hover {
+    background-color: #ffa116;
+}
+
+.section-mini-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #fff;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.section-mini-subtitle {
+    font-size: 14px;
+    color: #999;
+    margin-bottom: 20px;
+}
+
+.leetcode-card {
+    margin: 20px 0;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #1a1a1a;
+    padding: 10px;
+    transition: transform 0.3s;
+}
+
+.leetcode-card:hover {
+    transform: translateY(-5px);
+}
+
+.leetcode-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
     body {
