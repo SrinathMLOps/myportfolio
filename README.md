@@ -21,6 +21,7 @@ A modern, responsive portfolio website with a dark theme.
    - `client1.png`, `client2.png`, etc. - Client logos (recommended: transparent PNG)
 
 3. **Test Locally**
+   
    - Simply open `index.html` in your web browser
    - No server required for basic testing
 
